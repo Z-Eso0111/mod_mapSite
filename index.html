@@ -1,0 +1,43 @@
+<!-- Web Sayfası Script (index.html) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapSite</title>
+    <style>
+        body {
+            background-image: url('https://z-eso0111.github.io/80b8c0af-7280-4d80-942d-02755d66b02d');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+
+<img src="https://z-eso0111.github.io/a462ef69-cce7-4709-ba93-1767a40f26e8" alt="Resim Buton" onclick="showInput()">
+
+<div id="inputContainer" style="display: none;">
+    <textarea id="modCodeInput" placeholder="Mod Code"></textarea><br>
+    <button onclick="saveCode()">Save Code</button>
+    <button onclick="cancelSave()">Cancel Save</button>
+</div>
+
+<script>
+    function showInput() {
+        document.getElementById("inputContainer").style.display = "block";
+    }
+
+    function saveCode() {
+        const modCode = document.getElementById("modCodeInput").value;
+        // Mod Code ile Minecraft moduna bağlanma işlemini yapacak fonksiyonu buraya ekleyin.
+    }
+
+    function cancelSave() {
+        document.getElementById("inputContainer").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
