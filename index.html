@@ -1,42 +1,68 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapSite</title>
+    <title>MapSite Mod</title>
     <style>
         body {
-            background-image: url('blob:https://z-eso0111.github.io/80b8c0af-7280-4d80-942d-02755d66b02d');
+            background-image: url("blob:https://z-eso0111.github.io/80b8c0af-7280-4d80-942d-02755d66b02d");
             background-size: cover;
-            background-repeat: no-repeat;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #image-button {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        #code-input {
+            display: none;
         }
     </style>
 </head>
 <body>
+    <div id="image-button">
+        <img src="blob:https://z-eso0111.github.io/a462ef69-cce7-4709-ba93-1767a40f26e8" alt="Code Input Button" onclick="showCodeInput()">
+    </div>
 
-<img src="blob:https://z-eso0111.github.io/a462ef69-cce7-4709-ba93-1767a40f26e8" alt="Resim Buton" onclick="showInput()">
+    <div id="code-input">
+        <input type="text" id="code" placeholder="Enter the code">
+        <button onclick="saveMap()">Save Code</button>
+        <button onclick="cancelSave()">Cancel Save</button>
+    </div>
 
-<div id="inputContainer" style="display: none;">
-    <textarea id="modCodeInput" placeholder="Mod Code"></textarea><br>
-    <button onclick="saveCode()">Save Code</button>
-    <button onclick="cancelSave()">Cancel Save</button>
-</div>
+    <script>
+        function showCodeInput() {
+            document.getElementById('code-input').style.display = 'block';
+        }
 
-<script>
-    function showInput() {
-        document.getElementById("inputContainer").style.display = "block";
-    }
+        function saveMap() {
+            var code = document.getElementById('code').value;
+            // Sunucuya kodu gönder ve haritayı güncelle
+            fetch('/save_map', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'code=' + code,
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                // Başarılıysa eylemleri gerçekleştir
+            });
+        }
 
-    function saveCode() {
-        const modCode = document.getElementById("modCodeInput").value;
-        // Mod Code ile Minecraft moduna bağlanma işlemini yapacak fonksiyonu buraya ekleyin.
-    }
-
-    function cancelSave() {
-        document.getElementById("inputContainer").style.display = "none";
-    }
-</script>
-
+        function cancelSave() {
+            document.getElementById('code-input').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
