@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +6,15 @@
     <title>MapSite</title>
     <style>
         body {
-            background-image: url("https://media.discordapp.net/attachments/1132673001498869820/1156596434917916733/latest.png?ex=65158bde&is=65143a5e&hm=f8eedf7bec35defa8cc69672239d83ad06b226ee5f674d9bbe93312d693472bd&=&width=1193&height=671");
+            background-image: url("https://cdn.discordapp.com/attachments/1132673001498869820/1156596434917916733/latest.png?ex=65158bde&is=65143a5e&hm=f8eedf7bec35defa8cc69672239d83ad06b226ee5f674d9bbe93312d693472bd&");
             background-size: cover;
             background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
         #image-button {
             background-image: url("https://cdn.discordapp.com/attachments/1132673001498869820/1156628295912259644/Add-Map.png?ex=6515a98a&is=6514580a&hm=94bddfd98385a1850c32035b00dfb671ac2dd3f5b15154c5075768a68517b3f0&");
@@ -18,33 +23,31 @@
             height: 50px;
             cursor: pointer;
         }
-        #code-input {
-            display: none;
+        #code-display {
+            color: green;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-<div id="image-button" onclick="showCodeInput()"></div>
-<input type="text" id="code-input" placeholder="Enter the code">
-<button onclick="saveCode()">Save Code</button>
-<button onclick="cancelSave()">Cancel Save</button>
+<div id="image-button" onclick="generateCodeAndConnect()"></div>
+<div id="code-display"></div>
 
 <script>
-    function showCodeInput() {
-        document.getElementById("code-input").style.display = "block";
-    }
+    function generateCodeAndConnect() {
+        // AJAX ile sunucudan kod alabilirsiniz
+        // Bu örnekte rastgele bir kod oluşturuyoruz
+        fetch("/get-code") // Bu endpoint'i uygun şekilde sunucunuza uyarlamalısınız
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("code-display").innerText = "MapSite Mod Code: " + data.code;
 
-    function saveCode() {
-        var enteredCode = document.getElementById("code-input").value;
-        // AJAX ile bu kodu sunucuya gönderme işlemleri
-        // Burada XMLHttpRequest veya fetch API kullanabilirsiniz
-        // Örneğin: fetch("/save-code", { method: "POST", body: JSON.stringify({ code: enteredCode }) })
-        // Sonrasında kullanıcıya geri bildirim vermek gerekir
-    }
-
-    function cancelSave() {
-        document.getElementById("code-input").style.display = "none";
+                // Şimdi bu kodu kullanarak Minecraft moduna bağlanabilirsiniz
+                // Bu işlemi gerçekleştirmek için uygun bir mod fonksiyonu kullanmanız gerekecek
+                // Örneğin: connectToMod(data.code);
+            })
+            .catch(error => console.error("Error:", error));
     }
 </script>
 
